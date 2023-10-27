@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class Visitor {
+public class Visitor implements Discountable{
     private String name;
     private int age;
     private String phone_number;
@@ -104,6 +104,7 @@ public class Visitor {
         boolean start_visitor_loop = true;
         String choice;
         Scanner input_visitor = new Scanner(System.in);
+        System.out.println("Welcome "+this.getName()+".....");
         while (start_visitor_loop) {
             System.out.println("\nVisitor Menu");
             System.out.println("1. Explore the zoo");
@@ -164,6 +165,10 @@ public class Visitor {
             } else if (Objects.equals(choice, "5")) {
                 Main.viewDeals();
             } else if (Objects.equals(choice, "6")) {
+                if(this.getMembership()==-1){
+                    System.out.println("Buy Membership First!!!!!");
+                    continue;
+                }
                 boolean res = printAnimals();
                 if (res == false) {
                     continue;
@@ -243,7 +248,7 @@ public class Visitor {
                             System.out.println("Attraction is Closed Now!!!!!");
                         }
                         else{
-                            System.out.println("Attraction is Ope Now");
+                            System.out.println("Attraction is Open Now");
                             System.out.println("Buy Your Ticket Now!!!!!");
                         }
                         System.out.println("-------------------");
@@ -277,10 +282,11 @@ public class Visitor {
 
     public void buyMembership() {
         System.out.println("Buy Membership:-");
-        System.out.println("1. Basic Membership (₹20)");
-        System.out.println("2. Preminum Membership (₹50)");
+        System.out.println("1. Basic Membership (Rs. 20)");
+        System.out.println("2. Preminum Membership (Rs. 50)");
         String choice;
         Scanner input_buyMembership = new Scanner(System.in);
+        System.out.print("Enter Your Choice: ");
         choice = input_buyMembership.nextLine();
         if (Objects.equals(choice, "1")) {
             System.out.print("Apply Discount code (none/Code): ");
@@ -289,10 +295,10 @@ public class Visitor {
                 // proceed for balance check
                 if (this.getBalance() >= 20) {
                     System.out.println("Basic Membership purchased successfully");
-                    this.setBalance(this.getBalance() - 20);
+                    this.setBalance(this.getBalance() - 20.0);
                     this.setMembership(0);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
-                    Main.setTotal_Revenue(Main.getTotal_Revenue()+20);
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
+                    Main.setTotal_Revenue(Main.getTotal_Revenue()+20.0);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
                     //input_buyMembership.close();
@@ -306,12 +312,12 @@ public class Visitor {
                     //input_buyMembership.close();
                     return;
                 }
-                double new_price = 20 - (((Main.getSenior_discount()) / 100) * 20);
+                double new_price = 20 - (((Main.getSenior_discount()) / 100.0) * 20.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Basic Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(0);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -326,12 +332,12 @@ public class Visitor {
                     //input_buyMembership.close();
                     return;
                 }
-                double new_price = 20 - (((Main.getMinor_discount()) / 100) * 20);
+                double new_price = 20 - (((Main.getMinor_discount()) / 100.0) * 20.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Basic Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(0);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -346,12 +352,12 @@ public class Visitor {
                     //input_buyMembership.close();
                     return;
                 }
-                double new_price = 20 - (((Main.getStudent_discount()) / 100) * 20);
+                double new_price = 20 - (((Main.getStudent_discount()) / 100.0) * 20.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Basic Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(0);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -370,10 +376,10 @@ public class Visitor {
                 // proceed for balance check
                 if (this.getBalance() >= 50) {
                     System.out.println("Preminum Membership purchased successfully");
-                    this.setBalance(this.getBalance() - 50);
+                    this.setBalance(this.getBalance() - 50.0);
                     this.setMembership(1);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
-                    Main.setTotal_Revenue(Main.getTotal_Revenue()+50);
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
+                    Main.setTotal_Revenue(Main.getTotal_Revenue()+50.0);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
                    // input_buyMembership.close();
@@ -386,12 +392,12 @@ public class Visitor {
                    // input_buyMembership.close();
                     return;
                 }
-                double new_price = 50 - (((Main.getSenior_discount()) / 100) * 50);
+                double new_price = 50 - (((Main.getSenior_discount()) / 100.0) * 50.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Premium Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(1);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -405,12 +411,12 @@ public class Visitor {
                    // input_buyMembership.close();
                     return;
                 }
-                double new_price = 50 - (((Main.getMinor_discount()) / 100) * 50);
+                double new_price = 50 - (((Main.getMinor_discount()) / 100.0) * 50.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Preminum Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(1);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -424,12 +430,12 @@ public class Visitor {
                   //  input_buyMembership.close();
                     return;
                 }
-                double new_price = 50 - (((Main.getStudent_discount()) / 100) * 50);
+                double new_price = 50 - (((Main.getStudent_discount()) / 100.0) * 50.0);
                 if (this.getBalance() >= new_price) {
                     System.out.println("Premium Membership purchased successfully");
                     this.setBalance(this.getBalance() - new_price);
                     this.setMembership(1);
-                    System.out.println("Your balance is now :₹" + this.getBalance());
+                    System.out.println("Your balance is now :Rs. " + this.getBalance());
                     Main.setTotal_Revenue(Main.getTotal_Revenue()+new_price);
                 } else {
                     System.out.println("Not enough Balanace!!!!!!");
@@ -497,14 +503,14 @@ public class Visitor {
         System.out.println("Select a Attraction to buy a Ticket");
         int counter = 1;
         for (Attractions attr : Main.Attractions_Record) {
-            System.out.println(counter + ". " + attr.getName() + " (₹" + attr.getPrice() + ")");
+            System.out.println(counter + ". " + attr.getName() + " (Rs. " + attr.getPrice() + ")");
             counter++;
         }
         System.out.println();
         System.out.print("Enter your choice: ");
         int ch = input_buyTickets.nextInt();
-        boolean res = validateIndex(ch);
         input_buyTickets.nextLine();
+        boolean res = validateIndex(ch);
         if(res==false){
             System.out.println("Wrong Info Provided!!!!!");
             //input_buyTickets.close();
@@ -522,10 +528,12 @@ public class Visitor {
             if(discount_coupan==-1){
                 discount_coupan=0;
             }
+            discount_coupan=discount_coupan*Total_Price;
             Total_Price=Total_Price-discount_coupan;
             boolean isValid=checkBalance(Total_Price);
             if(isValid==false){
-                System.out.println("Not Enough Balance!!!!!!");
+                applyDiscount();
+                //System.out.println("Not Enough Balance!!!!!!");
                // input_buyTickets.close();
                 return;
             }
@@ -533,21 +541,24 @@ public class Visitor {
             this.attraction_map.put(attr, number_of_tickets);
             Main.setTotal_Revenue(Main.getTotal_Revenue()+Total_Price);
             System.out.println("Ticket Purchased Successfully.....");
+            System.out.println(Total_Price);
             this.setBalance(this.getBalance()-Total_Price);
             System.out.println("Your Balance is now: "+this.getBalance());
         }
         else{
             //coupan + deals
-            double discount_coupan = applyDiscount(number_of_tickets, ch-1)*Total_Price;
+            double discount_coupan = applyDiscount(number_of_tickets, ch-1);
             if(discount_coupan==-1){
                 discount_coupan=0;
             }
+            discount_coupan=discount_coupan*Total_Price;
             double after_discount_coupan = Total_Price-discount_coupan;
             //now deal 
             double net_price = applyDeals(after_discount_coupan, number_of_tickets);
             boolean isValid = checkBalance(net_price);
             if(isValid==false){
-                System.out.println("Not Enough Balance!!!!!");
+                applyDiscount();
+                //System.out.println("Not Enough Balance!!!!!");
                 //input_buyTickets.close();
                 return;
             }
@@ -582,6 +593,7 @@ public class Visitor {
         Animal animal = Main.Animals_Record.get(ind);
         System.out.println("1. Feed " + animal.getMy_name());
         System.out.println("2. Read about " + animal.getMy_name());
+        System.out.print("Enter Your Choice: ");
         String chString = input_visitAnimal.nextLine();
         if (Objects.equals("1", chString)) {
             // feed here
@@ -680,7 +692,7 @@ public class Visitor {
                 return new_price;
             }
             else{
-                return price;
+                return price*1.0;
             }
 
         }
@@ -694,12 +706,12 @@ public class Visitor {
                 return new_price;
             }
             else{
-                return price;
+                return price*1.0;
             }
         }
         else{
             //error
-            return price;
+            return price*1.0;
         }
     }
 
@@ -732,7 +744,7 @@ public class Visitor {
                 //input_applyDiscount.close();
                 return -1;
             }
-            double discount = (Main.getMinor_discount()/100);
+            double discount = (Main.getMinor_discount()/100.0);
             //input_applyDiscount.close();
             return discount;
         }
@@ -744,7 +756,8 @@ public class Visitor {
                 //input_applyDiscount.close();
                 return -1;
             }
-            double discount = (Main.getSenior_discount()/100);
+            double discount = (Main.getSenior_discount()/100.0);
+            //System.out.println(discount);
            // input_applyDiscount.close();
             return discount;
         }
@@ -756,7 +769,7 @@ public class Visitor {
                 //input_applyDiscount.close();
                 return -1;
             }
-            double discount = (Main.getStudent_discount()/100);
+            double discount = (Main.getStudent_discount()/100.0);
             //input_applyDiscount.close();
             return discount;
         }
@@ -765,7 +778,7 @@ public class Visitor {
             return -1;
         }
         else if(Objects.equals(choice.toLowerCase(),attr.getName()+attr.getDiscount())){
-            double discount = (attr.getDiscount());
+            double discount = (attr.getDiscount())*1.0;
             if(discount==0){
                // input_applyDiscount.close();
                 return -1;
@@ -790,5 +803,10 @@ public class Visitor {
         else{
             return false;
         }
+    }
+
+    public void applyDiscount(){
+        System.out.println("Not Enough Balance!!!!!");
+        return;
     }
 }

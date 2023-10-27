@@ -464,30 +464,30 @@ public class Admin implements Discountable {
                     isFound=true;
                     if(animal instanceof Mammals){
                         //check for mammal counter
-                        System.out.println("Deleted Successfully.....");
-                        if(Main.getMammals_Counter()<2){
+                        if(Main.getMammals_Counter()<=2){
                             System.out.println("Mammals Need to be Atleast 2");
-                            System.out.println("Add a Mammal!!!!!");
-                            addAnimal(1);
+                            System.out.println("Cant Delete!!!!!");
+                            return;
                         }
+                        System.out.println("Deleted Successfully.....");
                     }
                     else if(animal instanceof Reptiles){
                         //check for Reptile counter
-                        System.out.println("Deleted Successfully.....");
                         if(Main.getReptiles_Counter()<2){
                             System.out.println("Reptiles Need to be Atleast 2");
-                            System.out.println("Add a Reptile!!!!!");
-                            addAnimal(2);
+                            System.out.println("Cant Delete!!!!!");
+                            return;
                         }
+                        System.out.println("Deleted Successfully.....");
                     }
                     else if(animal instanceof Amphibians){
                         //check for Amphibian counter
-                        System.out.println("Deleted Successfully.....");
                         if(Main.getAmphibians_Counter()<2){
                             System.out.println("Amphibians Need to be Atleast 2");
-                            System.out.println("Add a Amphibian!!!!!");
-                            addAnimal(3);
+                            System.out.println("Cant Delete!!!!!");
+                            return;
                         }
+                        System.out.println("Deleted Successfully.....");
                     }
                     break;
                 }

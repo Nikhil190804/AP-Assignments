@@ -14,15 +14,15 @@ interface Discountable {
 
 public class Main {
     // list out the data structures and variables
-    public static List<Visitor> Visitor_Record = new ArrayList<>();
-    public static List<Attractions> Attractions_Record = new ArrayList<>();
-    public static List<Animal> Animals_Record = new ArrayList<>();
     private static int student_discount = 0;
     private static int minor_discount = 10;
     private static int senior_discount = 20;
     private static int deal_2_attractions_15=0;
+    public static List<Attractions> Attractions_Record = new ArrayList<>();
     private static int deal_3_attractions_30=0;
+    public static List<Animal> Animals_Record = new ArrayList<>();
     private static double Total_Revenue = 0;
+    public static List<Visitor> Visitor_Record = new ArrayList<>();
     private static int Mammals_Counter=0;
     private static int Reptiles_Counter=0;
     private static int Amphibians_Counter=0;
@@ -167,6 +167,7 @@ public class Main {
             System.out.println("1. Register ");
             System.out.println("2. LogIn ");
             System.out.println("3. Back");
+            System.out.print("Enter Your Choice: ");
             choice = input_handleVisitors.nextLine();
             if (Objects.equals("1", choice)) {
                 // register a member and add it to arraylist
